@@ -8,6 +8,6 @@ def init_db(app):
     db.init_app(app)  # ✅ Bind SQLAlchemy to Flask app
 
     with app.app_context():
-        from models import User, AppCluster  # ✅ Import both models
+        from models import User, AppCluster, Business # ✅ Import both models
         db.create_all()
         print("✅ Database tables created.")
