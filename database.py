@@ -5,9 +5,10 @@ db = SQLAlchemy()
 
 def init_db(app):
     """Initialize the database within the Flask app context."""
-    db.init_app(app)  # ✅ Bind SQLAlchemy to Flask app
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # Disable unnecessary warnings
+    db.init_app(app)
 
     with app.app_context():
-        from models import User, AppCluster, Business # ✅ Import both models
-        db.create_all()
+        db.create_all()  # ✅ Creates tables if they don't exist
         print("✅ Database tables created.")
